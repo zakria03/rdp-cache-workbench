@@ -200,7 +200,7 @@ Validate the module manifest:
 Test-ModuleManifest .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
 ```
 
-If `Invoke-RdpCacheReview.ps1` changes, regenerate the module wrapper before validating:
+`scripts/Sync-ModuleFromScript.ps1` is a maintainer helper, not runtime tooling and not part of the PowerShell Gallery module package. If `Invoke-RdpCacheReview.ps1` changes, regenerate the module wrapper before validating:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Sync-ModuleFromScript.ps1

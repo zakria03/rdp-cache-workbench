@@ -37,7 +37,7 @@ Before changing this area, read `SECURITY_REVIEW.md` and preserve the path-injec
 ## Change Guidance
 
 - Prefer small, conservative PowerShell changes that match the existing style.
-- Keep the root script and module command behavior in sync. After changing `Invoke-RdpCacheReview.ps1`, run `.\scripts\Sync-ModuleFromScript.ps1`.
+- Keep the root script and module command behavior in sync. `scripts/Sync-ModuleFromScript.ps1` is a maintainer helper, not runtime tooling. After changing `Invoke-RdpCacheReview.ps1`, run it to regenerate the module wrapper.
 - Keep generated case output out of the repository.
 - Update documentation when user-visible behavior, parameters, outputs, dependency sources, or security posture changes.
 - Use clear, direct language for prompts and warnings.
