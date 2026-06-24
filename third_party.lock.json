@@ -1,0 +1,30 @@
+{
+  "schema": "rdp-cache-workbench.third_party_lock.v1",
+  "supply_chain_model": "Pinned GitHub commit ZIP URLs stored in a fixed local tool cache. The PowerShell app refuses to download a tool if the configured URL does not contain the pinned commit. SHA256 verification is supported but left empty for GitHub-generated commit archives; for higher assurance, publish reviewed release assets from your own fork and set expected_archive_sha256.",
+  "review_date": "2026-06-24",
+  "default_tool_cache_root": "%LOCALAPPDATA%\\RdpCacheWorkbench\\tools",
+  "tools": [
+    {
+      "name": "ANSSI bmc-tools",
+      "repository": "ANSSI-FR/bmc-tools",
+      "upstream_url": "https://github.com/ANSSI-FR/bmc-tools",
+      "version": "3.05",
+      "pinned_commit": "5a4cad32be78b3b874aeec910cb478e04ba3501e",
+      "zip_url": "https://github.com/ANSSI-FR/bmc-tools/archive/5a4cad32be78b3b874aeec910cb478e04ba3501e.zip",
+      "expected_archive_sha256": "",
+      "license": "CECILL-2.1",
+      "security_review_summary": "No network calls, shell execution, eval, subprocess, or package installation behaviour observed in the reviewed source. It reads local RDP cache artefacts and writes BMP output. Main residual risks are untrusted binary parsing, memory/CPU pressure, and large output volume."
+    },
+    {
+      "name": "BriMor Labs RDPieces",
+      "repository": "brimorlabs/rdpieces",
+      "upstream_url": "https://github.com/brimorlabs/rdpieces",
+      "version": "1.1 build 20201118",
+      "pinned_commit": "2a74aeb4b8f42fac1af1f6c9d721fcb299224021",
+      "zip_url": "https://github.com/brimorlabs/rdpieces/archive/2a74aeb4b8f42fac1af1f6c9d721fcb299224021.zip",
+      "expected_archive_sha256": "",
+      "license": "LGPL-3.0",
+      "security_review_summary": "Uses Perl backticks to invoke ImageMagick and interpolates file paths into command strings. The wrapper mitigates this by staging BMP inputs under a temporary subst drive and passing simple paths such as R:\\source and R:\\output to RDPieces. Residual risk remains because this is shell-driven forensic tooling processing untrusted images."
+    }
+  ]
+}

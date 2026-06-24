@@ -1,0 +1,22 @@
+# Local PowerShell/session artefacts
+*.log
+*.tmp
+
+# Case output should not be committed
+rdp-cache-review-*/
+cache/
+extracted/
+rebuilt/
+logs/
+tools/bmc-tools/
+tools/rdpieces/
+tools/Publish-ToGitHub.ps1
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+#Guides
+PUBLISHING.md
