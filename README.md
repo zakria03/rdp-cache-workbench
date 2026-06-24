@@ -4,6 +4,8 @@ PowerShell tooling for defensively reviewing Windows Remote Desktop bitmap cache
 
 This repository can be used directly as a script or packaged as the `RdpCacheWorkbench` PowerShell module.
 
+See [ARCHITECTURE.md](ARCHITECTURE.md) for a high-level overview of how the script, module package, pinned helper tools, validation scripts, and release workflow fit together.
+
 The project automates a practical RDP bitmap cache review workflow:
 
 1. Search for Windows RDP bitmap cache files across the PC or inside a user-specified folder.

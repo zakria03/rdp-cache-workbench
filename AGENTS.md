@@ -7,11 +7,12 @@ This repository contains a defensive PowerShell workbench for reviewing Windows 
 Start with these files, in this order:
 
 1. `README.md` for the intended user workflow, parameters, outputs, and interpretation limits.
-2. `Invoke-RdpCacheReview.ps1` for the direct script entry point.
-3. `RdpCacheWorkbench/RdpCacheWorkbench.psm1` and `RdpCacheWorkbench/RdpCacheWorkbench.psd1` for the PowerShell module package.
-4. `third_party.lock.json` for pinned external tool versions.
-5. `SECURITY_REVIEW.md` before changing download, install, path handling, cache validation, or third-party tool execution logic.
-6. `SECURITY.md` before changing vulnerability reporting or security posture language.
+2. `ARCHITECTURE.md` for the solution structure and maintenance flow.
+3. `Invoke-RdpCacheReview.ps1` for the direct script entry point.
+4. `RdpCacheWorkbench/RdpCacheWorkbench.psm1` and `RdpCacheWorkbench/RdpCacheWorkbench.psd1` for the PowerShell module package.
+5. `third_party.lock.json` for pinned external tool versions.
+6. `SECURITY_REVIEW.md` before changing download, install, path handling, cache validation, or third-party tool execution logic.
+7. `SECURITY.md` before changing vulnerability reporting or security posture language.
 
 ## Safety And Scope
 
