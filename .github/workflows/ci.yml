@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  powershell:
+    name: PowerShell validation
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run project checks
+        shell: powershell
+        run: .\scripts\Test-Project.ps1
+
+      - name: Validate package staging
+        shell: powershell
+        run: .\scripts\Test-Package.ps1
+
+      - name: Run PSScriptAnalyzer
+        shell: powershell
+        run: |
+          Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
+          Invoke-ScriptAnalyzer -Path .\Invoke-RdpCacheReview.ps1, .\RdpCacheWorkbench, .\scripts, .\tests -Recurse -Severity Error

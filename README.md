@@ -74,6 +74,13 @@ Import-Module .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
 Invoke-RdpCacheReview
 ```
 
+Or download a source archive from the latest GitHub release, extract it, and import the module from the extracted folder:
+
+```powershell
+Import-Module .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
+Invoke-RdpCacheReview
+```
+
 After the module is published to PowerShell Gallery, install it with:
 
 ```powershell
@@ -200,6 +207,18 @@ Validate the module manifest:
 Test-ModuleManifest .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
 ```
 
+Run the full local project checks:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-Project.ps1
+```
+
+Validate the module package staging folder:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-Package.ps1
+```
+
 `scripts/Sync-ModuleFromScript.ps1` is a maintainer helper, not runtime tooling and not part of the PowerShell Gallery module package. If `Invoke-RdpCacheReview.ps1` changes, regenerate the module wrapper before validating:
 
 ```powershell
@@ -213,6 +232,20 @@ Publish-Module -Path .\RdpCacheWorkbench -NuGetApiKey $env:PSGALLERY_API_KEY
 ```
 
 Keep the module in this repository unless the project grows into multiple independently versioned tools. GitHub Releases and PowerShell Gallery can both point at the same source repository.
+
+## Code signing
+
+Release maintainers with an Authenticode code-signing certificate can sign the PowerShell files before publishing:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Sign-ReleaseFiles.ps1 -CertificateThumbprint "<thumbprint>"
+```
+
+Run `scripts\Sync-ModuleFromScript.ps1` before signing. Regenerating the module wrapper after signing will remove the signature from `RdpCacheWorkbench.psm1`.
+
+## Changelog
+
+See `CHANGELOG.md` for release history.
 
 ## GitHub Pages landing site
 

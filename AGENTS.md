@@ -50,7 +50,8 @@ Before finishing code changes, run the narrowest useful checks available:
 ```powershell
 [void][scriptblock]::Create((Get-Content -Raw .\Invoke-RdpCacheReview.ps1))
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Sync-ModuleFromScript.ps1
-Test-ModuleManifest .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-Project.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Test-Package.ps1
 ```
 
 For behavior changes, also run the relevant documented command in a controlled test folder and inspect the generated manifests.

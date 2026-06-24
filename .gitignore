@@ -2,8 +2,10 @@
 *.log
 *.tmp
 *.nupkg
+*.snupkg
 
 # Case output should not be committed
+artifacts/
 rdp-cache-review-*/
 cache/
 extracted/
