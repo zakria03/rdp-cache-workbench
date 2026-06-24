@@ -14,8 +14,8 @@
       <h1>RDP Cache Review Workbench</h1>
       <p class="lead">Search, copy, extract, and reconstruct Windows Remote Desktop bitmap cache artefacts using a repeatable PowerShell workflow with pinned, locally cached helper tools.</p>
       <div class="actions">
-        <a href="../Invoke-RdpCacheReview.ps1" class="button">View script</a>
-        <a href="../README.md" class="button secondary">Read documentation</a>
+        <a href="https://github.com/zakria03/rdp-cache-workbench/releases/tag/v0.2.0" class="button">Download v0.2.0</a>
+        <a href="https://github.com/zakria03/rdp-cache-workbench#readme" class="button secondary">Read documentation</a>
       </div>
     </div>
   </header>
@@ -26,6 +26,18 @@
       <p>
         Windows Remote Desktop can leave bitmap cache files on the client machine. Those files may contain visual fragments from previous RDP sessions.
         This project packages a defensive workflow for finding those files, preserving a working copy, extracting bitmap tiles, and attempting automated reconstruction.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Current release</h2>
+      <p>
+        Version <strong>v0.2.0</strong> includes the direct PowerShell script, the importable <code>RdpCacheWorkbench</code> module, a GitHub release ZIP, CI validation, package checks, and optional Authenticode signing support for release maintainers.
+      </p>
+      <pre><code>Import-Module .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
+Invoke-RdpCacheReview</code></pre>
+      <p>
+        The module is structured for future PowerShell Gallery publication. Until then, download the release ZIP or clone the repository and import the module locally.
       </p>
     </section>
 
@@ -59,6 +71,9 @@
       <h2>Quick start</h2>
       <pre><code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\Invoke-RdpCacheReview.ps1</code></pre>
+      <p>Or run the module command after importing the module:</p>
+      <pre><code>Import-Module .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
+Invoke-RdpCacheReview</code></pre>
       <p>For a targeted run:</p>
       <pre><code>.\Invoke-RdpCacheReview.ps1 -SearchRoot "$env:LOCALAPPDATA\Microsoft\Terminal Server Client\Cache"</code></pre>
       <p>Use a custom fixed tool cache:</p>
@@ -77,6 +92,13 @@
     <p>This release pins ANSSI bmc-tools to commit <code>5a4cad32be78b3b874aeec910cb478e04ba3501e</code> and BriMor Labs RDPieces to commit <code>2a74aeb4b8f42fac1af1f6c9d721fcb299224021</code>. The script no longer pulls moving <code>master.zip</code> branch archives.</p>
     <p>Pinned helper tools are cached under <code>%LOCALAPPDATA%\RdpCacheWorkbench\tools</code> by default, or under a user-supplied <code>-ToolCacheRoot</code>. After first successful setup, later runs can reuse those tools offline.</p>
     <p>RDPieces is run through a hardened wrapper that stages input under a temporary <code>subst</code> drive to reduce command-line path injection and path parsing risk.</p>
+  </section>
+
+  <section class="panel">
+    <h2>License and attribution</h2>
+    <p>
+      RDP Cache Review Workbench is licensed under the BSD 3-Clause License. Redistributions must retain the copyright notice and license text naming Zakria Mahmood.
+    </p>
   </section>
 </main>
 
