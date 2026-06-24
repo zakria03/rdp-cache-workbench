@@ -7,10 +7,11 @@ This repository contains a defensive PowerShell workbench for reviewing Windows 
 Start with these files, in this order:
 
 1. `README.md` for the intended user workflow, parameters, outputs, and interpretation limits.
-2. `Invoke-RdpCacheReview.ps1` for the implementation.
-3. `third_party.lock.json` for pinned external tool versions.
-4. `SECURITY_REVIEW.md` before changing download, install, path handling, cache validation, or third-party tool execution logic.
-5. `SECURITY.md` before changing vulnerability reporting or security posture language.
+2. `Invoke-RdpCacheReview.ps1` for the direct script entry point.
+3. `RdpCacheWorkbench/RdpCacheWorkbench.psm1` and `RdpCacheWorkbench/RdpCacheWorkbench.psd1` for the PowerShell module package.
+4. `third_party.lock.json` for pinned external tool versions.
+5. `SECURITY_REVIEW.md` before changing download, install, path handling, cache validation, or third-party tool execution logic.
+6. `SECURITY.md` before changing vulnerability reporting or security posture language.
 
 ## Safety And Scope
 
@@ -36,6 +37,7 @@ Before changing this area, read `SECURITY_REVIEW.md` and preserve the path-injec
 ## Change Guidance
 
 - Prefer small, conservative PowerShell changes that match the existing style.
+- Keep the root script and module command behavior in sync. After changing `Invoke-RdpCacheReview.ps1`, run `.\scripts\Sync-ModuleFromScript.ps1`.
 - Keep generated case output out of the repository.
 - Update documentation when user-visible behavior, parameters, outputs, dependency sources, or security posture changes.
 - Use clear, direct language for prompts and warnings.
@@ -46,7 +48,9 @@ Before changing this area, read `SECURITY_REVIEW.md` and preserve the path-injec
 Before finishing code changes, run the narrowest useful checks available:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$null = [scriptblock]::Create((Get-Content -Raw .\Invoke-RdpCacheReview.ps1))"
+[void][scriptblock]::Create((Get-Content -Raw .\Invoke-RdpCacheReview.ps1))
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Sync-ModuleFromScript.ps1
+Test-ModuleManifest .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
 ```
 
 For behavior changes, also run the relevant documented command in a controlled test folder and inspect the generated manifests.

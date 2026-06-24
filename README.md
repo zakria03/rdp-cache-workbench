@@ -2,6 +2,8 @@
 
 PowerShell tooling for defensively reviewing Windows Remote Desktop bitmap cache artefacts.
 
+This repository can be used directly as a script or packaged as the `RdpCacheWorkbench` PowerShell module.
+
 The project automates a practical RDP bitmap cache review workflow:
 
 1. Search for Windows RDP bitmap cache files across the PC or inside a user-specified folder.
@@ -65,6 +67,20 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\Invoke-RdpCacheReview.ps1
 ```
 
+Or import the module from a local clone:
+
+```powershell
+Import-Module .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
+Invoke-RdpCacheReview
+```
+
+After the module is published to PowerShell Gallery, install it with:
+
+```powershell
+Install-Module RdpCacheWorkbench -Scope CurrentUser
+Invoke-RdpCacheReview
+```
+
 Search a specific folder:
 
 ```powershell
@@ -95,6 +111,12 @@ Run in non-interactive mode without opening Explorer windows:
 
 ```powershell
 .\Invoke-RdpCacheReview.ps1 -SearchRoot C:\Users\ZM -WorkingRoot D:\Cases\RDP-Case-001 -ProcessAllSources -NonInteractive -NoOpenFolders
+```
+
+The same parameters are available through the module command:
+
+```powershell
+Invoke-RdpCacheReview -SearchRoot C:\Users\ZM -WorkingRoot D:\Cases\RDP-Case-001 -ProcessAllSources -NonInteractive -NoOpenFolders
 ```
 
 ## Parameters
@@ -161,6 +183,36 @@ Or check all profiles:
 ```powershell
 .\Invoke-RdpCacheReview.ps1 -SearchRoot C:\Users
 ```
+
+## PowerShell module packaging
+
+The `RdpCacheWorkbench/` folder is structured for PowerShell Gallery packaging:
+
+```text
+RdpCacheWorkbench/
+  RdpCacheWorkbench.psd1
+  RdpCacheWorkbench.psm1
+```
+
+Validate the module manifest:
+
+```powershell
+Test-ModuleManifest .\RdpCacheWorkbench\RdpCacheWorkbench.psd1
+```
+
+If `Invoke-RdpCacheReview.ps1` changes, regenerate the module wrapper before validating:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\Sync-ModuleFromScript.ps1
+```
+
+Publish to PowerShell Gallery after reviewing the package and setting an API key:
+
+```powershell
+Publish-Module -Path .\RdpCacheWorkbench -NuGetApiKey $env:PSGALLERY_API_KEY
+```
+
+Keep the module in this repository unless the project grows into multiple independently versioned tools. GitHub Releases and PowerShell Gallery can both point at the same source repository.
 
 ## GitHub Pages landing site
 

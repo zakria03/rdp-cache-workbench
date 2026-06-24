@@ -1,3 +1,7 @@
+﻿#requires -version 5.1
+# This module command is generated from ../Invoke-RdpCacheReview.ps1.
+# Keep both entry points in sync when changing review workflow behavior.
+function Invoke-RdpCacheReview {
 <#
 .SYNOPSIS
     Collects and reviews Windows RDP bitmap cache artefacts.
@@ -64,7 +68,6 @@
     - Perl modules from MetaCPAN/CPAN: https://metacpan.org/
 #>
 
-#requires -version 5.1
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $false)]
@@ -831,5 +834,9 @@ catch {
     Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
     Write-Host ""
     Write-Host 'If this happened after installing dependencies, open a new PowerShell window and rerun the script.' -ForegroundColor Yellow
-    exit 1
+        throw
 }
+
+}
+
+Export-ModuleMember -Function Invoke-RdpCacheReview

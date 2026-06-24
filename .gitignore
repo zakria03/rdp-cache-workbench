@@ -1,6 +1,7 @@
 # Local PowerShell/session artefacts
 *.log
 *.tmp
+*.nupkg
 
 # Case output should not be committed
 rdp-cache-review-*/
