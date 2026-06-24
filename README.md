@@ -237,6 +237,10 @@ The script is designed to avoid unnecessary reinstall/download loops:
 
 This script downloads pinned public tooling from GitHub only when the fixed local tool cache is missing or stale. For controlled environments, pre-populate `-ToolCacheRoot` from a reviewed internal source or publish reviewed release assets from your own fork and set `ExpectedArchiveSha256`.
 
+## License
+
+This project is licensed under the BSD 3-Clause License. Redistributions must retain the copyright notice and license text naming Zakria Mahmood.
+
 
 ## Supply-chain posture
 

@@ -27,7 +27,7 @@ Author = 'Zakria Mahmood'
 CompanyName = 'Zakria Mahmood'
 
 # Copyright statement for this module
-Copyright = '(c) Zakria Mahmood. All rights reserved.'
+Copyright = '(c) 2026 Zakria Mahmood. Licensed under the BSD 3-Clause License.'
 
 # Description of the functionality provided by this module
 Description = 'Defensive PowerShell workbench for reviewing Windows Remote Desktop bitmap cache artefacts.'
