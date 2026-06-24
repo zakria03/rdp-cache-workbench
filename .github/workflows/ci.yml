@@ -33,4 +33,13 @@ jobs:
           Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
           Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
           Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
-          Invoke-ScriptAnalyzer -Path .\Invoke-RdpCacheReview.ps1, .\RdpCacheWorkbench, .\scripts, .\tests -Recurse -Severity Error
+          $findings = @(
+            '.\Invoke-RdpCacheReview.ps1',
+            '.\RdpCacheWorkbench',
+            '.\scripts',
+            '.\tests'
+          ) | ForEach-Object {
+            Invoke-ScriptAnalyzer -Path $_ -Recurse -Severity Error
+          }
+          $findings | Format-Table -AutoSize
+          if ($findings.Count -gt 0) { exit 1 }
